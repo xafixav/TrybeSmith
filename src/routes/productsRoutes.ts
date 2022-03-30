@@ -2,17 +2,17 @@ import { Router } from 'express';
 import ProductsController from '../controller/products';
 import ValidationProduct from '../middleware/validationProduct';
 
-const router = Router();
+const routerProducts = Router();
 
 const productsController = new ProductsController();
 const middleware = new ValidationProduct();
 
-router
+routerProducts
   .route('/')
   .get(async (req, res, next) =>
     productsController.getAll(req, res, next));
 
-router
+routerProducts
   .route('/')
   .post(
     async (req, res, next) =>
@@ -21,4 +21,4 @@ router
       productsController.create(req, res, next),
   );
 
-export default router;
+export default routerProducts;
