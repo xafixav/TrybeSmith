@@ -1,7 +1,7 @@
 import ICreated from '../interface/ICreated';
 import IProduct from '../interface/IProduct';
 import connection from '../models/connection';
-import ProductModel from '../models/products';
+import ProductModel from '../models/product';
 
 export default class ProductService {
   private model: ProductModel;

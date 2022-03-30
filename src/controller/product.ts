@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import ICreated from '../interface/ICreated';
 import IProduct from '../interface/IProduct';
-import ProductService from '../service/products';
+import ProductService from '../service/product';
 
 export default class ProductsController {
   private service: ProductService;
