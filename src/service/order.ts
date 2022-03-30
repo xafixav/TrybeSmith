@@ -1,6 +1,5 @@
 import connection from '../models/connection';
 import OrderModel from '../models/order';
-import IOrder from '../interface/IOrder';
 import ProductModel from '../models/product';
 import IOrderResponse from '../interface/IOrderResponse';
 
