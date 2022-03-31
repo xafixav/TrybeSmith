@@ -1,11 +1,10 @@
-import { Request, Response } from 'express';
-import IError from '../interface/IError';
+import { ErrorRequestHandler } from 'express';
 
-export default class Error {
-  public static consoleError(e: IError, _req: Request, res: Response):Response {
-    const status = e.status || 500;
-    const message = e.message || 'Internal server error';
-    console.log(e.message);
-    return res.status(status).json(message);
-  }
-}
+const error:ErrorRequestHandler = (err, _req, res, _next) => {
+  const status = err.status || 500;
+
+  console.log(err);
+  return res.status(status).json({ error: err.message });
+};
+
+export default error;
