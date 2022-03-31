@@ -18,4 +18,11 @@ export default class UserModel {
     VALUES (?, ?, ?, ?)`, [username, classe, level, password]);
     return { id: insertId, ...data };
   }
+
+  public async getUser(username: string, password: string): Promise<RowDataPacket[]> {
+    const [result] = await this.connection.execute<RowDataPacket[]>(`
+    SELECT * FROM Trybesmith.Users WHERE username = ? and password = ?
+    `, [username, password]);
+    return result;
+  }
 }
