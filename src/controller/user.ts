@@ -34,7 +34,7 @@ export default class UserController {
   Promise<Response | void> {
     try {
       const { username, password } = req.body;
-      const data: object | null = await this.service.getUser({ username, password });
+      const data: object | null = await this.service.loginUser({ username, password });
       if (!data) {
         return res.status(StatusCodes.UNAUTHORIZED).json({ error: 'Username or password invalid' });
       }
