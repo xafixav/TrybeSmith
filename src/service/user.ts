@@ -27,10 +27,9 @@ export default class UserService {
     return { tokenResult };
   }
 
-  public async getUser(data: ILogin): Promise<null | object> {
+  public async loginUser(data: ILogin): Promise<null | object> {
     const { username, password } = data;
     const user = await this.model.getUser(username, password);
-    console.log(user);
     
     if (user.length < 1) {
       return null;
@@ -39,5 +38,12 @@ export default class UserService {
     const Token = this.token.generateToken({ username, password });
 
     return { token: Token };
+  }
+
+  public async getUser(data: ILogin): Promise<IUser > {
+    const { username, password } = data;
+    const [user] = await this.model.getUser(username, password);
+
+    return user as IUser;
   }
 }
