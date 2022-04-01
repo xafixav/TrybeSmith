@@ -1,5 +1,6 @@
-import { Pool, RowDataPacket } from 'mysql2/promise';
+import { Pool, RowDataPacket, ResultSetHeader } from 'mysql2/promise';
 import IOrder from '../interface/IOrder';
+import IOrderRequest from '../interface/IOrderRequest';
 
 export default class OrderModel {
   constructor(private connection: Pool) {}
@@ -11,5 +12,14 @@ export default class OrderModel {
      Trybesmith.Products as TSP WHERE TSP.orderId = TSO.id;
     `);
     return result as IOrder[];
+  }
+
+  public async create(data: IOrderRequest): Promise<number> {
+    const { userId } = data;
+    const [{ insertId }] = await this.connection.execute<ResultSetHeader>(`
+    INSERT into Trybesmith.Orders(userId)
+    VALUES (?)
+    `, [userId]);
+    return insertId;
   }
 }

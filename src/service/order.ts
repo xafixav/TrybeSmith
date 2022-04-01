@@ -2,6 +2,8 @@ import connection from '../models/connection';
 import OrderModel from '../models/order';
 import ProductModel from '../models/product';
 import IOrderResponse from '../interface/IOrderResponse';
+import IOrderCreated from '../interface/IOrderCreated';
+import IOrderRequest from '../interface/IOrderRequest';
 
 export default class OrderService {
   private model: OrderModel;
@@ -23,5 +25,11 @@ export default class OrderService {
       });
     const resultFinal = await Promise.all(result);
     return resultFinal as IOrderResponse[];
+  }
+
+  public async createOrder(data: IOrderRequest): Promise<IOrderCreated> {
+    const { userId, products } = data;
+    await this.model.create(data);
+    return { order: { userId, products } };
   }
 }

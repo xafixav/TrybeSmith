@@ -18,4 +18,15 @@ export default class OrderController {
       next(e);
     }
   }
+
+  public async create(req: Request, res: Response, next:NextFunction): Promise<Response | void> {
+    try {
+      const { userId, products } = req.body;
+
+      const data = await this.service.createOrder({ userId, products });
+      return res.status(StatusCodes.CREATED).json(data);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
