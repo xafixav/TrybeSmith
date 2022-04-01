@@ -24,7 +24,7 @@ export default class UserService {
     await this.model.createProduct(data);
     const tokenResult = this.token.generateToken({ username, password });
 
-    return { tokenResult };
+    return { token: tokenResult };
   }
 
   public async loginUser(data: ILogin): Promise<null | object> {
