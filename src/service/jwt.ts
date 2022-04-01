@@ -18,4 +18,13 @@ export default class TokenService {
     });
     return token;
   }
+
+  public validateToken(token: string) {
+    try {
+      const user: string | Jwt.JwtPayload = Jwt.verify(token, this.secret);
+      return user;
+    } catch (e) {
+      return null;
+    }
+  }
 }

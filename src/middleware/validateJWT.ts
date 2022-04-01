@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import Jwt from 'jsonwebtoken';
 import TokenService from '../service/jwt';
 import UserService from '../service/user';
 
@@ -38,16 +37,4 @@ export default class ValidationToken {
       return res.status(StatusCodes.UNAUTHORIZED).json({ error: 'Invalid token' });
     }
   }
-
-  // public async setUserId(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { authorization } = req.headers;      
-
-  //     const { username, password } = Jwt
-  //       .decode(authorization) as { username: string, password: string };
-  //     const user = await this.user.getUser({ username, password });
-  //     console.log(user);
-  //     req.body = { ...req.body, userId: user.id };
-  //   }
-  // }
 }
